@@ -75,6 +75,7 @@
 (defvar shell-pop-window-configuration nil)
 ;; internal}
 
+(defvaralias 'shell-pop-window-height 'shell-pop-window-size)
 (defcustom shell-pop-window-size 30
   "Percentage for shell-buffer window size."
   :type '(restricted-sexp
@@ -83,7 +84,6 @@
                             (<= x 100)
                             (<= 0 x)))))
   :group 'shell-pop)
-(defvaralias 'shell-pop-window-height 'shell-pop-window-size)
 
 (defcustom shell-pop-full-span nil
   "If non-nil, the shell spans full width of a window"
