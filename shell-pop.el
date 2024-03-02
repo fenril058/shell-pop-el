@@ -9,7 +9,7 @@
 ;; Created:       2009-05-31 23:57:08
 ;; Keywords:      shell, terminal, tools
 ;; Compatibility: GNU 24.x
-;; Package-Requires: ((emacs "24") (cl-lib "0.5"))
+;; Package-Requires: ((emacs "24.1") (cl-lib "0.5"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -75,7 +75,6 @@
 (defvar shell-pop-window-configuration nil)
 ;; internal}
 
-(defvaralias 'shell-pop-window-height 'shell-pop-window-size)
 (defcustom shell-pop-window-size 30
   "Percentage for shell-buffer window size."
   :type '(restricted-sexp
@@ -84,6 +83,7 @@
                             (<= x 100)
                             (<= 0 x)))))
   :group 'shell-pop)
+(defvaralias 'shell-pop-window-height 'shell-pop-window-size)
 
 (defcustom shell-pop-full-span nil
   "If non-nil, the shell spans full width of a window"
@@ -134,7 +134,9 @@ The value is a list with these items:
   :set 'shell-pop--set-shell-type
   :group 'shell-pop)
 
-(defcustom shell-pop-term-shell shell-file-name
+(defcustom shell-pop-term-shell (or explicit-shell-file-name
+                                    (getenv "ESHELL")
+                                    shell-file-name)
   "Shell used in `term' and `ansi-term'."
   :type 'string
   :group 'shell-pop)
